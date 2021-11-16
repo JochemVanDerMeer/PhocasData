@@ -17,9 +17,6 @@ class Result(db.Model):
     def __repr__(self):
         return f'id: {self.id}, match: {self.match}, year: {self.year}, field: {self.field}, total time: {self.totalTime}'
 
-#@app.before_first_request
-#def create_tables():
-#    db.create_all()
 
 @app.route("/")
 def main():
