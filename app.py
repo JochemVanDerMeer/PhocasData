@@ -5,7 +5,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/results.db'
 db = SQLAlchemy(app)
 
-db.create_all()
 
 class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,6 +16,10 @@ class Result(db.Model):
     def __repr__(self):
         return f'id: {self.id}, match: {self.match}, year: {self.year}, field: {self.field}, total time: {self.totalTime}'
 
+#when database is empty
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 @app.route("/")
 def main():
